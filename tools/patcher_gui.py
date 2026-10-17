@@ -558,6 +558,7 @@ class PatcherApp:
             quote_lbl.pack(fill=tk.X, padx=(24, 4), pady=(4, 0))
             recolor_widgets.append(quote_lbl)
 
+        link_lbl: Optional[tk.Widget] = None
         if tier.requester_url:
             link_lbl = tk.Label(
                 card,
@@ -573,7 +574,7 @@ class PatcherApp:
             recolor_widgets.append(link_lbl)
 
         for w in recolor_widgets:
-            if w is not rb and w.cget("text") != "Open Reddit Request Thread ↗":
+            if w is not rb and w is not link_lbl:
                 w.bind("<Button-1>", lambda _e, k=key: self._select_tier(k))
 
         self._tier_cards[key] = (card, recolor_widgets)
